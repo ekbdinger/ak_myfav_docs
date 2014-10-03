@@ -24,10 +24,10 @@ function ak_myfav_docs_flag_default_flags() {
     'types' => array(
       0 => 'priv_documentation',
     ),
-    'flag_short' => 'Add to Favourites',
+    'flag_short' => 'Add to Favorites',
     'flag_long' => 'Add this item to your favorites',
     'flag_message' => 'This item is added to your favorites',
-    'unflag_short' => 'Remove From Favourites',
+    'unflag_short' => 'Remove From Favorites',
     'unflag_long' => '',
     'unflag_message' => 'This item is deleted from your favorites',
     'unflag_denied_text' => '',
@@ -47,11 +47,11 @@ function ak_myfav_docs_flag_default_flags() {
     'show_on_teaser' => 1,
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'api_version' => 2,
     'module' => 'ak_myfav_docs',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 2,
   );
   return $flags;
 

@@ -22,7 +22,7 @@ function ak_myfav_docs_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'My Favourite Documents';
+  $handler->display->display_options['title'] = 'My Favorite Documents';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -52,6 +52,15 @@ function ak_myfav_docs_views_default_views() {
     'hover' => 0,
     'condensed' => 0,
   );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No Favs';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<p>You currently do not have any favorite documents. </p>
+<p>Future:  Add more detailed description with links.</p>';
+  $handler->display->display_options['empty']['area']['format'] = '2';
   /* Relationship: Flags: favourites */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
@@ -64,12 +73,40 @@ function ak_myfav_docs_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = 'Document';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Has new content */
+  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'history';
+  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['label'] = '';
+  $handler->display->display_options['fields']['timestamp']['alter']['text'] = '<span class="label label-success">[timestamp]</span>';
+  $handler->display->display_options['fields']['timestamp']['element_label_colon'] = FALSE;
+  /* Field: Content: File */
+  $handler->display->display_options['fields']['field_doc_priv_file']['id'] = 'field_doc_priv_file';
+  $handler->display->display_options['fields']['field_doc_priv_file']['table'] = 'field_data_field_doc_priv_file';
+  $handler->display->display_options['fields']['field_doc_priv_file']['field'] = 'field_doc_priv_file';
+  $handler->display->display_options['fields']['field_doc_priv_file']['label'] = '';
+  $handler->display->display_options['fields']['field_doc_priv_file']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_doc_priv_file']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_doc_priv_file']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_doc_priv_file']['type'] = 'file_download_link';
+  $handler->display->display_options['fields']['field_doc_priv_file']['settings'] = array(
+    'text' => 'Download',
+    'field_formatter_class' => '',
+  );
+  /* Field: Content: Version */
+  $handler->display->display_options['fields']['taxonomy_vocabulary_10']['id'] = 'taxonomy_vocabulary_10';
+  $handler->display->display_options['fields']['taxonomy_vocabulary_10']['table'] = 'field_data_taxonomy_vocabulary_10';
+  $handler->display->display_options['fields']['taxonomy_vocabulary_10']['field'] = 'taxonomy_vocabulary_10';
+  $handler->display->display_options['fields']['taxonomy_vocabulary_10']['settings'] = array(
+    'field_formatter_class' => '',
+  );
   /* Field: Flags: Flag link */
   $handler->display->display_options['fields']['ops']['id'] = 'ops';
   $handler->display->display_options['fields']['ops']['table'] = 'flag_content';
   $handler->display->display_options['fields']['ops']['field'] = 'ops';
   $handler->display->display_options['fields']['ops']['relationship'] = 'flag_content_rel';
-  $handler->display->display_options['fields']['ops']['label'] = 'Unmark As Favourite';
+  $handler->display->display_options['fields']['ops']['label'] = '';
+  $handler->display->display_options['fields']['ops']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -96,7 +133,7 @@ function ak_myfav_docs_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
-  $handler->display->display_options['path'] = 'favourites/documents';
+  $handler->display->display_options['path'] = 'favorites/documents';
   $export['favourite_documents'] = $view;
 
   return $export;
